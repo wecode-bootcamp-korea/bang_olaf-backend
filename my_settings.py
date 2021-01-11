@@ -1,4 +1,4 @@
-DATABASES = {
+DATABASE = {
     
 }
 

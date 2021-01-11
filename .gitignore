@@ -5,6 +5,7 @@ db.sqlite3-journal
 media 
 *.csv
 my_settings.py
+readme.md
 
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,macos,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,macos,python
