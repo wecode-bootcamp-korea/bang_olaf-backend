@@ -7,8 +7,9 @@ my_settings.py
 
 
 
-# Created by https://www.toptal.com/developers/gitignore/api/vscode,macos,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=vscode,macos,python
+
+# Created by https://www.toptal.com/developers/gitignore/api/python,macos,vscode
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,macos,vscode
 
 ### macOS ###
 # General
@@ -187,7 +188,7 @@ dmypy.json
 !.vscode/extensions.json
 *.code-workspace
 
-# End of https://www.toptal.com/developers/gitignore/api/vscode,macos,python
+# End of https://www.toptal.com/developers/gitignore/api/python,macos,vscode
 
 
 
