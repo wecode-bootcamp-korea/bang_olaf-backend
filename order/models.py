@@ -1,26 +1,22 @@
 from django.db      import models
 
 from user.models    import User
-
+from bangoraf.utils import TimeStampModel
 from product.models import Product
 
-class Payment(models.Model):
-    order          = models.OneToOneField("Order", on_delete=models.CASCADE, null=True)
+class Payment(TimeStampModel):
+    order          = models.OneToOneField("Order", on_delete=models.CASCADE)
     card           = models.CharField(max_length=50)
     payment_method = models.CharField(max_length=50)
-    ammount        = models.IntegerField(null=True)
-    created_at     = models.DateField(auto_now_add=True)
-    updated_at     = models.DateField(auto_now=True)    
+    ammount        = models.IntegerField()
 
     class Meta:
         db_table = 'payment'
 
-class Order(models.Model):
+class Order(TimeStampModel):
     user       = models.ForeignKey(User, on_delete=models.CASCADE)
     status     = models.ForeignKey("Status", on_delete=models.CASCADE)
     address    = models.ForeignKey("Address", on_delete=models.CASCADE, null=True)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
 
     class Meta:
         db_table = 'order'
