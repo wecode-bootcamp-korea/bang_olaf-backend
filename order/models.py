@@ -41,7 +41,6 @@ class Cart(models.Model):
         db_table = 'cart'
 
 class GiftWrapping(models.Model):
-    cart            = models.ForeignKey("Cart", on_delete=models.CASCADE,related_name="cart")
     EDITION_GOLD    = 'Gold'
     EDITION_SILVER  = 'Silver'
 
@@ -51,7 +50,8 @@ class GiftWrapping(models.Model):
     ]
     edition     = models.CharField(max_length=6, choices=EDITION_CHOICES, default=EDITION_GOLD)
     description = models.TextField()
-
+    cart            = models.ForeignKey("Cart", on_delete=models.CASCADE,related_name="cart")
+    
     class Meta:
         db_table = 'giftwrapping'
 
