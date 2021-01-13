@@ -1,100 +1,95 @@
 from django.db import models
 
 
-class Categories(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=50)
 
     class Meta:
-        db_table = 'categories'
+        db_table = 'Category'
 
-class SubCategories(models.Model):
-    category = models.ForeignKey("Categories", on_delete=models.CASCADE)
+class SubCategory(models.Model):
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
     name     = models.CharField(max_length=50)
 
     class Meta:
-        db_table = 'subcategories'
+        db_table = 'subcategory'
 
-class Products(models.Model):
-    subcategory  = models.ForeignKey("SubCategories", on_delete=models.CASCADE)
+class Product(models.Model):
+    sub_category  = models.ForeignKey("SubCategory", on_delete=models.CASCADE)
     title        = models.CharField(max_length=50)
     detail_title = models.CharField(max_length=50)
     price        = models.DecimalField(max_digits=18, decimal_places=2) 
     description  = models.TextField()
 
     class Meta:
-        db_table = 'products'
+        db_table = 'product'
 
-class Mains(models.Model):
-    product       = models.ForeignKey("Products", on_delete=models.CASCADE)
+class Main(models.Model):
+    product       = models.ForeignKey("Product", on_delete=models.CASCADE)
     title         = models.CharField(max_length=50)
     description   = models.CharField(max_length=50)
-    mainimage_url = models.CharField(max_length=100)
+    main_image_url = models.CharField(max_length=100)
 
     class Meta:
-        db_table = 'mains'
+        db_table = 'main'
     
 
-class Services(models.Model):
+class Service(models.Model):
     name = models.CharField(max_length=50)
     
     class Meta:
-        db_table = 'services'
+        db_table = 'service'
 
-class ProductServices(models.Model):
-    product = models.ForeignKey("Products", on_delete=models.CASCADE)
-    service = models.ForeignKey("Services", on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'productservices'
-
-
-
-class ProductColors(models.Model):
-    product = models.ForeignKey("Products", on_delete=models.CASCADE)
-    color   = models.ForeignKey("Colors", on_delete=models.CASCADE)
+class ProductService(models.Model):
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    service = models.ForeignKey("Service", on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'productcolors'
+        db_table = 'productservice'
 
-class Colors(models.Model):
+
+
+
+class Color(models.Model):
     name               = models.CharField(max_length=50)
     image_url          = models.CharField(max_length=200)
 
     class Meta:
-        db_table = 'colors'
+        db_table = 'color'
 
-class ColorImages(models.Model):
-    colorimage_url = models.CharField(max_length=200)
-    productcolor   = models.ForeignKey("ProductColors", on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'colorimages'
-
-class Products_Specifications(models.Model):
-    product           = models.ForeignKey("Products", on_delete=models.CASCADE)
-    specifications    = models.ForeignKey("Specifications", on_delete=models.CASCADE)
+class ProductImage(models.Model):
+    image_url      = models.CharField(max_length=200)
+    product        = models.ForeignKey("Product", on_delete=models.CASCADE)
+    color          = models.ForeignKey("Color", on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'products_spec'
+        db_table = 'ProductImage'
 
-class Specifications(models.Model):
+class ProductsSpecification(models.Model):
+    product           = models.ForeignKey("Product", on_delete=models.CASCADE)
+    specifications    = models.ForeignKey("Specification", on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'ProductsSpecification'
+
+class Specification(models.Model):
     name = models.CharField(max_length=50)
     data = models.JSONField()
 
     class Meta:
-        db_table = 'specifications'
+        db_table = 'specification'
 
-class Inspirations(models.Model):
+class Inspiration(models.Model):
     title            = models.CharField(max_length=50)
     description      = models.TextField()
     video_url        = models.CharField(max_length=200)
     slide_image_url  = models.CharField(max_length=200)
 
     class Meta:
-        db_table = 'inspirations'
+        db_table = 'inspiration'
 
 
-class Features(models.Model):
+class Feature(models.Model):
     image_url    = models.CharField(max_length=200)
     video_url    = models.CharField(max_length=200)
     description  = models.TextField()
@@ -102,4 +97,4 @@ class Features(models.Model):
     subtitle     = models.CharField(max_length=50)
 
     class Meta:
-        db_table = 'features'
+        db_table = 'feature'
