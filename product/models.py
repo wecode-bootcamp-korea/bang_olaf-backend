@@ -80,6 +80,7 @@ class Specification(models.Model):
         db_table = 'specification'
 
 class Inspiration(models.Model):
+    product          = models.ForeignKey("Product", on_delete=models.CASCADE)
     title            = models.CharField(max_length=50)
     description      = models.TextField()
     video_url        = models.CharField(max_length=200)

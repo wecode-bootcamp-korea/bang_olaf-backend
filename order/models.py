@@ -46,10 +46,10 @@ class GiftWrapping(models.Model):
     EDITION_SILVER  = 'Silver'
 
     EDITION_CHOICES = [
-		(edition_gold, 'Gold'),
-        (edition_silver, 'Silver')
+		(EDITION_GOLD, 'Gold'),
+        (EDITION_SILVER, 'Silver')
     ]
-    edition     = models.CharField(max_length=6, choices=edition_choies, default=edition_gold)
+    edition     = models.CharField(max_length=6, choices=EDITION_CHOICES, default=EDITION_GOLD)
     description = models.TextField()
 
     class Meta:
