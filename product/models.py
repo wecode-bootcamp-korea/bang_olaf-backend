@@ -15,7 +15,7 @@ class SubCategories(models.Model):
         db_table = 'subcategories'
 
 class Products(models.Model):
-    subcategory = models.ForeignKey("SubCategories", on_delete=models.CASCADE)
+    subcategory  = models.ForeignKey("SubCategories", on_delete=models.CASCADE)
     title        = models.CharField(max_length=50)
     detail_title = models.CharField(max_length=50)
     price        = models.DecimalField(max_digits=18, decimal_places=2) 
@@ -25,9 +25,9 @@ class Products(models.Model):
         db_table = 'products'
 
 class Mains(models.Model):
-    product = models.ForeignKey("Products", on_delete=models.CASCADE)
-    title   = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    product       = models.ForeignKey("Products", on_delete=models.CASCADE)
+    title         = models.CharField(max_length=50)
+    description   = models.CharField(max_length=50)
     mainimage_url = models.CharField(max_length=100)
 
     class Meta:
@@ -58,7 +58,7 @@ class ProductColors(models.Model):
 
 class Colors(models.Model):
     name               = models.CharField(max_length=50)
-    colorpickimage_url = models.CharField(max_length=200)
+    image_url          = models.CharField(max_length=200)
 
     class Meta:
         db_table = 'colors'
@@ -70,9 +70,9 @@ class ColorImages(models.Model):
     class Meta:
         db_table = 'colorimages'
 
-class Products_Spec(models.Model):
-    product = models.ForeignKey("Products", on_delete=models.CASCADE)
-    spec    = models.ForeignKey("Specifications", on_delete=models.CASCADE)
+class Products_Specifications(models.Model):
+    product           = models.ForeignKey("Products", on_delete=models.CASCADE)
+    specifications    = models.ForeignKey("Specifications", on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'products_spec'
@@ -88,15 +88,15 @@ class Inspirations(models.Model):
     title            = models.CharField(max_length=50)
     description      = models.TextField()
     video_url        = models.CharField(max_length=200)
-    slideimage_url   = models.CharField(max_length=200)
+    slide_image_url  = models.CharField(max_length=200)
 
     class Meta:
         db_table = 'inspirations'
 
 
 class Features(models.Model):
-    imageurl     = models.CharField(max_length=200)
-    video        = models.CharField(max_length=200)
+    image_url    = models.CharField(max_length=200)
+    video_url    = models.CharField(max_length=200)
     description  = models.TextField()
     title        = models.CharField(max_length=50)
     subtitle     = models.CharField(max_length=50)
