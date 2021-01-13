@@ -5,18 +5,19 @@ from user.models    import User
 from product.models import Product
 
 class Payment(models.Model):
-    user           = models.ForeignKey(User, on_delete=models.CASCADE)
+    order          = models.OneToOneField("Order", on_delete=models.CASCADE, null=True)
     card           = models.CharField(max_length=50)
     payment_method = models.CharField(max_length=50)
     ammount        = models.IntegerField(null=True)
     created_at     = models.DateField(auto_now_add=True)
     updated_at     = models.DateField(auto_now=True)    
+
     class Meta:
         db_table = 'payment'
 
 class Order(models.Model):
+    user       = models.ForeignKey(User, on_delete=models.CASCADE)
     status     = models.ForeignKey("Status", on_delete=models.CASCADE)
-    payment    = models.OneToOneField("Payment", on_delete=models.CASCADE, null=True)
     address    = models.ForeignKey("Address", on_delete=models.CASCADE, null=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -31,7 +32,6 @@ class Status(models.Model):
         db_table = 'status'
 
 class Cart(models.Model):
-    user          = models.ForeignKey(User, on_delete=models.CASCADE)
     order         = models.ForeignKey("Order", on_delete=models.CASCADE)
     product       = models.ForeignKey(Product, on_delete=models.CASCADE)
     count         = models.IntegerField(default=1)
