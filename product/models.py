@@ -16,18 +16,18 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     sub_category  = models.ForeignKey("SubCategory", on_delete=models.CASCADE)
-    title        = models.CharField(max_length=50)
-    detail_title = models.CharField(max_length=50)
-    price        = models.DecimalField(max_digits=18, decimal_places=2) 
-    description  = models.TextField()
+    title         = models.CharField(max_length=50)
+    detail_title  = models.CharField(max_length=50)
+    price         = models.DecimalField(max_digits=18, decimal_places=2) 
+    description   = models.TextField()
 
     class Meta:
         db_table = 'product'
 
 class Main(models.Model):
-    product       = models.ForeignKey("Product", on_delete=models.CASCADE)
-    title         = models.CharField(max_length=50)
-    description   = models.CharField(max_length=50)
+    product        = models.ForeignKey("Product", on_delete=models.CASCADE)
+    title          = models.CharField(max_length=50)
+    description    = models.CharField(max_length=50)
     main_image_url = models.CharField(max_length=100)
 
     class Meta:
