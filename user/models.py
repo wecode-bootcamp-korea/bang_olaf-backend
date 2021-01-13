@@ -7,6 +7,6 @@ class Users(models.Model):
     checkpassword       = models.CharField(max_length=100)
     first_name        = models.CharField(max_length=50)
     last_name         = models.CharField(max_length=50)
-    preferred_laguage = models.CharField(max_length=50)
+
 
     
