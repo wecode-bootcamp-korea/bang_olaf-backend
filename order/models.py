@@ -1,21 +1,22 @@
 from django.db      import models
+
 from user.models    import User
+
 from product.models import Product
 
 class Payment(models.Model):
-    order          = models.OneToOneField("Order", on_delete=models.CASCADE)
     user           = models.ForeignKey(User, on_delete=models.CASCADE)
-    ammount        = models.IntegerField()
     card           = models.CharField(max_length=50)
     payment_method = models.CharField(max_length=50)
+    ammount        = models.IntegerField()
     created_at     = models.DateField(auto_now_add=True)
     updated_at     = models.DateField(auto_now=True) 
     class Meta:
         db_table = 'payment'
 
 class Order(models.Model):
-    user       = models.ForeignKey(User, on_delete=models.CASCADE)
     status     = models.ForeignKey("Status", on_delete=models.CASCADE)
+    payment    = models.OneToOneField("Payment", on_delete=models.CASCADE)
     address    = models.ForeignKey("Address", on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -30,7 +31,8 @@ class Status(models.Model):
         db_table = 'status'
 
 class Cart(models.Model):
-    payment       = models.ForeignKey("Payment", on_delete=models.CASCADE)
+    user          = models.ForeignKey(User, on_delete=models.CASCADE)
+    order         = models.ForeignKey("Order", on_delete=models.CASCADE)
     product       = models.ForeignKey(Product, on_delete=models.CASCADE)
     count         = models.IntegerField(default=1)
     gift_wrapping = models.BooleanField()
@@ -54,9 +56,8 @@ class GiftWrapping(models.Model):
         db_table = 'giftwrapping'
 
 class Address(models.Model):
-    name    = models.CharField(max_length=50)
+    user    = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
-    email   = models.EmailField(max_length=254)
-
+    
     class Meta:
         db_table = 'address'
