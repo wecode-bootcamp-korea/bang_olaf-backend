@@ -55,7 +55,7 @@ class Products_Spec(models.Model):
 
 class Specifications(models.Model):
     name = models.CharField(max_length=50)
-    data = models.JSONField(encoder="utf-8")
+    data = models.JSONField()
 
 
 class Inspirations(models.Model):

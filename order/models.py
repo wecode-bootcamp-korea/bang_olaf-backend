@@ -3,7 +3,7 @@ from user.models    import Users
 from product.models import Products
 
 class Payments(models.Model):
-    user       = models.models.ForeignKey(Users, on_delete=models.CASCADE)
+    user       = models.ForeignKey(Users, on_delete=models.CASCADE)
     card       = models.CharField(max_length=50)
     createtime = models.DateField(auto_now_add=True)
 
@@ -23,12 +23,12 @@ class Carts(models.Model):
     giftwrapping = models.BooleanField()
 
 class GiftWrapping(models.Model):
-    cart           = models.ForeignKey("Carts", on_delete=models.CASCADE)
+    cart           = models.ForeignKey("Carts", on_delete=models.CASCADE,related_name="cart")
     edition_choies = (
 		('Gold', 'Gold'),
-        ('Silver', 'Silver'),
+        ('Silver', 'Silver')
     )
-    edition     = models.CharField(max_length=2, choices=edition_choies)
+    edition     = models.CharField(max_length=6, choices=edition_choies)
     description = models.TextField()
 
 class Address(models.Model):
