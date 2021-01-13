@@ -8,16 +8,16 @@ class Payment(models.Model):
     user           = models.ForeignKey(User, on_delete=models.CASCADE)
     card           = models.CharField(max_length=50)
     payment_method = models.CharField(max_length=50)
-    ammount        = models.IntegerField()
+    ammount        = models.IntegerField(null=True)
     created_at     = models.DateField(auto_now_add=True)
-    updated_at     = models.DateField(auto_now=True) 
+    updated_at     = models.DateField(auto_now=True)    
     class Meta:
         db_table = 'payment'
 
 class Order(models.Model):
     status     = models.ForeignKey("Status", on_delete=models.CASCADE)
-    payment    = models.OneToOneField("Payment", on_delete=models.CASCADE)
-    address    = models.ForeignKey("Address", on_delete=models.CASCADE)
+    payment    = models.OneToOneField("Payment", on_delete=models.CASCADE, null=True)
+    address    = models.ForeignKey("Address", on_delete=models.CASCADE, null=True)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
