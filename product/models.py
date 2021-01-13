@@ -80,7 +80,7 @@ class Specification(models.Model):
         db_table = 'specification'
 
 class Inspiration(models.Model):
-    product          = models.ForeignKey("Product", on_delete=models.CASCADE)
+    product          = models.models.OneToOneField("Product", on_delete=models.CASCADE)
     title            = models.CharField(max_length=50)
     description      = models.TextField()
     video_url        = models.CharField(max_length=200)
@@ -91,6 +91,7 @@ class Inspiration(models.Model):
 
 
 class Feature(models.Model):
+    product          = models.models.OneToOneField("Product", on_delete=models.CASCADE)
     image_url    = models.CharField(max_length=200)
     video_url    = models.CharField(max_length=200)
     description  = models.TextField()
