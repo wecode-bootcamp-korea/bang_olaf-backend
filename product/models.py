@@ -30,6 +30,18 @@ class ProductService(models.Model):
     class Meta:
         db_table = "productservice"
 
+class Product(models.Model):
+    sub_category          = models.ForeignKey("SubCategory", on_delete=models.CASCADE)
+    title                 = models.CharField(max_length=50)
+    detail_title          = models.CharField(max_length=50)
+    price                 = models.DecimalField(max_digits=18, decimal_places=2)
+    description           = models.TextField()
+    services              = models.ManyToManyField("Service",       through="ProductService")
+    specifications        = models.ManyToManyField("Specification", through="ProductSpecification")
+    colors                = models.ManyToManyField('Color', through="PrductImage")
+    class Meta:
+        db_table = "product"
+
 class Color(models.Model):
     name               = models.CharField(max_length=50)
     image_url          = models.CharField(max_length=200)
@@ -55,16 +67,6 @@ class Specification(models.Model):
     class Meta:
         db_table = "specification"
 
-class Product(models.Model):
-    sub_category          = models.ForeignKey("SubCategory", on_delete=models.CASCADE)
-    title                 = models.CharField(max_length=50)
-    detail_title          = models.CharField(max_length=50)
-    price                 = models.DecimalField(max_digits=18, decimal_places=2)
-    description           = models.TextField()
-    services              = models.ManyToManyField("Service",       through="ProductService")
-    specification         = models.ManyToManyField("Specification", through="ProductSpecification")
-    class Meta:
-        db_table = "product"
 
 class Inspiration(models.Model):
     product          = models.OneToOneField("Product", on_delete=models.CASCADE)
