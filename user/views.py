@@ -3,10 +3,8 @@ import re
 import bcrypt
 import jwt
 
-
 from django.views import View
 from django.http  import JsonResponse
-
 
 from user.models  import Users
 from user.utils   import email_regax, password_regax
@@ -65,7 +63,6 @@ class SignView(View):
 
         except KeyError:
             return JsonResponse({'MESSAGE' : 'KEY_ERRORS'}, status=400)
-
 
 class LoginView(View):
     def post(self, request):

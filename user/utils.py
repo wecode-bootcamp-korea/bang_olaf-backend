@@ -9,7 +9,6 @@ from user.models    import User
 email_regax    = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 password_regax = '[A-Za-z0-9@#$]{10,1000}'
 
-
 def login_decorator(func):
     def wrapper(self,request, *args, **kwargs):
         try:
