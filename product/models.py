@@ -58,12 +58,12 @@ class ProductImage(models.Model):
 class ProductSpecification(models.Model):
     product           = models.ForeignKey("Product", on_delete=models.CASCADE)
     specifications    = models.ForeignKey("Specification", on_delete=models.CASCADE)
+    data              = models.JSONField()
     class Meta:
         db_table = "ProductsSpecification"
 
 class Specification(models.Model):
     name = models.CharField(max_length=50)
-    data = models.JSONField()
     class Meta:
         db_table = "specification"
 
