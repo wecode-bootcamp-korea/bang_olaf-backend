@@ -37,7 +37,7 @@ class Product(models.Model):
     price                 = models.DecimalField(max_digits=18, decimal_places=2)
     description           = models.TextField()
     services              = models.ManyToManyField("Service",       through="ProductService")
-    specifications        = models.ManyToManyField("Specification", through="ProductSpecification")
+    #specifications        = models.ManyToManyField("Specification", through="ProductSpecification")
     colors                = models.ManyToManyField('Color', through="PrductImage")
     class Meta:
         db_table = "product"
@@ -55,17 +55,22 @@ class ProductImage(models.Model):
     class Meta:
         db_table = "ProductImage"
 
-class ProductSpecification(models.Model):
-    product           = models.ForeignKey("Product", on_delete=models.CASCADE)
-    specifications    = models.ForeignKey("Specification", on_delete=models.CASCADE)
-    class Meta:
-        db_table = "ProductsSpecification"
+#class ProductSpecification(models.Model):
+    #product           = models.ForeignKey("Product", on_delete=models.CASCADE)
+    #specifications    = models.ForeignKey("Specification", on_delete=models.CASCADE)
+    #class Meta:
+        #db_table = "ProductsSpecification"
 
 class Specification(models.Model):
-    name = models.CharField(max_length=50)
-    data = models.JSONField()
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    name    = models.CharField(max_length=50)
     class Meta:
         db_table = "specification"
+
+class SpecificationData(models.Model):
+    Specification   = models.ForeignKey("Specification", on_delete=models.CASCADE)
+    data            = models.JSONField()
+
 
 
 class Inspiration(models.Model):
